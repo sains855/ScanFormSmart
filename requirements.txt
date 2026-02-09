@@ -1,5 +1,5 @@
 flask
-easyocr
+paddleocr
 opencv-python
 pillow
 pdf2image

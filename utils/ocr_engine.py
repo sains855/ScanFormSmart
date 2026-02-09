@@ -1,8 +1,16 @@
-import easyocr
+from paddleocr import PaddleOCR
 
-reader = easyocr.Reader(['id','en'], gpu=False)
+ocr = PaddleOCR(
+    use_angle_cls=True,
+    lang='id',
+    show_log=False
+)
 
 def run_ocr(image_path):
-    results = reader.readtext(image_path, paragraph=True)
-    text = "\n".join([res[1] for res in results])
-    return text
+    result = ocr.ocr(image_path, cls=True)
+
+    texts = []
+    for line in result[0]:
+        texts.append(line[1][0])
+
+    return "\n".join(texts)
